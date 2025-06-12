@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --k {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: false;
+}
+
+@keyframes k {
+    to {
+        --k: 2;
+    }
+}
+
+*{
+    font-family: "Nunito", sans-serif;
+}
+
+#root {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.ringAnimation {
+    --k: 0;
+    animation: k 20s linear infinite;
+    border-radius: 100%;
+    width: 400px;
+    height: 400px;
+    padding: 2px;
+    background: linear-gradient(90deg, 
+        hsl(calc(var(--k)*1turn), 95%, 65%),
+        hsl(calc(var(--k)*1turn + 90deg), 95%, 65%)
+    );
+}
+.innerRing{
+    width: 390px;
+    height: 390px;
+    background: white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grd_color{
+     background:
+    linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%),
+    radial-gradient(at top center, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.10) 120%) #989898;
+  background-blend-mode: multiply, multiply;
+  background-clip: text;
+  color: transparent;
+}
