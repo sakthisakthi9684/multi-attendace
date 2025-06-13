@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosFlask } from "../utils/AxiosInstance";
 
@@ -10,6 +10,7 @@ const EmployeeAttendance = () => {
   const processingRef = useRef(false);
   const intervalRef = useRef(null);
   const navigate = useNavigate();
+  const { action } = useParams();
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const EmployeeAttendance = () => {
         {
           role,
           clinicId,
+          action,
         },
         {
           headers: {
@@ -98,7 +100,7 @@ const EmployeeAttendance = () => {
       async (blob) => {
         const formData = new FormData();
         formData.append("frame", blob, "frame.jpg");
-
+        formData.append("action", action);
         try {
           const response = await AxiosFlask.post("/process_frame", formData, {
             headers: {
@@ -117,17 +119,18 @@ const EmployeeAttendance = () => {
           }
           if (data.recognized) {
             setRecognitionStatus(`Recognized: ${data.name} (${data.role})`);
-            setMessage(data.messages[0]);
-
-            // Assuming the recognized data.name has an ID to navigate to
             const [name, id] = data.name.split("_");
             // stopRecognition();
+            if (!message) {
+              setMessage(data.messages[0]);
+              setTimeout(() => {
+                // Navigate to employee attendance page or dashboard with recognized ID
+                navigate(`/attendance-conformation/${id}/${data.messages[0]}`);
+                return;
+              }, 500);
+            }
 
-            setTimeout(() => {
-              // Navigate to employee attendance page or dashboard with recognized ID
-              navigate(`/attendance-conformation/${id}/${data.messages[0]}`);
-              return;
-            }, 500);
+            // Assuming the recognized data.name has an ID to navigate to
           } else if (data.boxes && data.boxes.length > 0) {
             drawBoxes(data.boxes);
           }

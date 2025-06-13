@@ -32,6 +32,7 @@ function AppContent() {
             path="/attendance-conformation/:id/:message"
             element={<AttendanceConformation />}
           />
+          <Route path="/employee-attendance/:action" element={<EmployeeAttendance />} />
         </Routes>
       </div>
     </div>

@@ -46,7 +46,7 @@ const PatientFaceRecognition = () => {
         {
           role,
           clinicId,
-          action: "",
+          action:"null",
         },
         {
           headers: {

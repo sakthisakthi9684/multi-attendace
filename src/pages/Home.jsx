@@ -22,7 +22,7 @@ function Home() {
         </div>
         <div>
           <img src="" alt="" />{" "}
-          <Link to="/employee-attendance">
+          <Link to="/attendance-manager">
             <button className="shadow hover:scale-105 text-xl duration-200 ease-in-out hover:shadow-md bg-gradient-to-tr text-[#103e89] font-bold from-[#a1c4fd] to-[#c2e9fb] px-6 py-3 rounded-full">
               {/* Employee Face Recognition */} Employee Attendance
             </button>{" "}
