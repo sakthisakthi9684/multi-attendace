@@ -12,6 +12,7 @@ const EmployeeAttendance = () => {
   const navigate = useNavigate();
   const { action } = useParams();
   const [message, setMessage] = useState("");
+  const messageLockedRef = useRef(false);
 
   useEffect(() => {
     const startCamera = async () => {
@@ -117,21 +118,21 @@ const EmployeeAttendance = () => {
             setRecognitionStatus(response.data.message);
             return;
           }
-          if (data.recognized) {
+          if (data.recognized && !messageLockedRef.current) {
             setRecognitionStatus(`Recognized: ${data.name} (${data.role})`);
             const [name, id] = data.name.split("_");
-            // stopRecognition();
-            if (message.length === 0) {
+
+            if (data.messages.length > 0) {
               setMessage(data.messages[0]);
+              messageLockedRef.current = true; // 🔐 Lock message update
               setTimeout(() => {
-                // Navigate to employee attendance page or dashboard with recognized ID
                 navigate(`/attendance-conformation/${id}/${data.messages[0]}`);
-                return;
               }, 500);
             }
+          }
 
-            // Assuming the recognized data.name has an ID to navigate to
-          } else if (data.boxes && data.boxes.length > 0) {
+          // Assuming the recognized data.name has an ID to navigate to
+          else if (data.boxes && data.boxes.length > 0) {
             drawBoxes(data.boxes);
           }
         } catch (err) {

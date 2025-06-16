@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import AxiosInstance from "../utils/AxiosInstance";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AttendanceConformation = () => {
   const { id, message } = useParams();
+  const [messages, setMessages] = useState("");
+
+  useEffect(() => {
+    if (message.length === 0) {
+      setMessages(message);
+    }
+  }, [message]);
   const [employee, setEmployee] = useState(null);
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
