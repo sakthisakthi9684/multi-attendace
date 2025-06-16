@@ -121,7 +121,7 @@ const EmployeeAttendance = () => {
             setRecognitionStatus(`Recognized: ${data.name} (${data.role})`);
             const [name, id] = data.name.split("_");
             // stopRecognition();
-            if (!message) {
+            if (message.length === 0) {
               setMessage(data.messages[0]);
               setTimeout(() => {
                 // Navigate to employee attendance page or dashboard with recognized ID
