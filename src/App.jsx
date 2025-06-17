@@ -22,6 +22,7 @@ function AppContent() {
             path="/patientfacerecognition"
             element={<PatientFaceRecognition />}
           />
+          
           <Route path="/patientdashboard/:id" element={<PaientDashBoard />} />
 
           <Route path="/employee-attendance" element={<EmployeeAttendance />} />
