@@ -8,8 +8,8 @@ const AxiosInstance = axios.create({
 
 export const AxiosFlask = axios.create({
   // baseURL: "http://127.0.0.1:5000",
-  baseURL: "https://flasktest.qsisphysio.com/",
-  // baseURL: "https://karlosflask.qsisphysio.com/",
+  // baseURL: "https://flasktest.qsisphysio.com/",
+  baseURL: "https://karlosflask.qsisphysio.com/",
 });
 
 export default AxiosInstance;
